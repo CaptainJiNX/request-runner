@@ -23,14 +23,13 @@ var timeout = setInterval(() => {
     {
         options.json = json;
     }
-    console.log('Requesting: ', uri, options);
 
     request(uri, options, (err, res, body) => {
-        if(err) {
+        if(err && err.code !== 'ECONNREFUSED') {
             return console.error(err);
         }
 
-        console.log(res.statusCode);
+        console.log(res && res.statusCode);
     });
 }, interval);
 
