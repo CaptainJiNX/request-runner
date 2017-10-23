@@ -25,7 +25,11 @@ var timeout = setInterval(() => {
     }
 
     request(uri, options, (err, res, body) => {
-        if(err && err.code !== 'ECONNREFUSED') {
+        if(err) {
+            if(err.code === 'ECONNREFUSED') {
+                return console.log(err.code);
+            }
+
             return console.error(err);
         }
 
